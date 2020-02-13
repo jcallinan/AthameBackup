@@ -318,7 +318,7 @@ namespace Athame.UI
             }
             catch (Exception ex)
             {
-                PresentException(ex);
+                throw ex;
 
             }
             finally
@@ -602,8 +602,7 @@ namespace Athame.UI
             }
             catch (Exception ex)
             {
-                PresentException(ex);
-            }
+                throw ex;            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -695,7 +694,7 @@ namespace Athame.UI
             }
             catch (Exception ex)
             {
-                PresentException(ex);
+                throw ex;
 
             }
             finally

@@ -63,7 +63,7 @@ namespace Athame.Settings
         public AthameSettings()
         {
             ServiceSettings = new Dictionary<string, StoredSettings>();
-            AlbumArtworkSaveFormat = AlbumArtworkSaveFormat.AsCover;
+            AlbumArtworkSaveFormat = AlbumArtworkSaveFormat.DontSave;
             GeneralSavePreference = new MediaTypeSavePreference
             {
                 AskForLocation = false,

@@ -14,11 +14,7 @@ namespace Athame.DownloadAndTag
 
         public static void Write(string path, Track track)
         {
-            AlbumArtFile artworkFile = null;
-            if (AlbumArtCache.Instance.HasItem(track.Album.CoverUri.ToString()))
-            {
-                artworkFile = AlbumArtCache.Instance.Get(track.Album.CoverUri.ToString());
-            }
+            
 
             using (var file = File.Create(path))
             {
@@ -37,33 +33,13 @@ namespace Athame.DownloadAndTag
                 file.Tag.Year = (uint) track.Year;
                 file.Tag.Copyright = CopyrightText;
                 file.Tag.Comment = CopyrightText;
-                if (artworkFile != null)
-                {
-                    file.Tag.Pictures = new IPicture[] {new Picture(new ByteVector(artworkFile.Data))};
-                }
+              
 
                 file.Save();
             }
 
             string fileName = null;
-            switch (Program.DefaultSettings.Settings.AlbumArtworkSaveFormat)
-            {
-                case AlbumArtworkSaveFormat.DontSave:
-                    break;
-                case AlbumArtworkSaveFormat.AsCover:
-                    fileName = artworkFile?.FileType.Append("cover");
-                    break;
-                case AlbumArtworkSaveFormat.AsArtistAlbum:
-                    fileName = artworkFile?.FileType.Append($"{track.Artist} - {track.Album.Title}");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            if (fileName != null && artworkFile != null)
-            {
-                var parentDir = Path.GetDirectoryName(path);
-                SysFile.WriteAllBytes(Path.Combine(parentDir, fileName), artworkFile.Data);
-            }
+         
         }
     }
 }

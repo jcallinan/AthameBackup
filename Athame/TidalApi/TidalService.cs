@@ -150,19 +150,16 @@ namespace Athame.TidalApi
                 Id = defaultArtist.Id.ToString(),
                 Name = EnglishArtistNameJoiner.JoinArtistNames((from artist in artists
                                                                 where artist.Type == EnglishArtistNameJoiner.ArtistMain
-                                                                select artist.Name).ToArray()),
-                PictureUrl = new Uri(defaultArtist.Picture)
+                                                                select artist.Name).ToArray())
             };
         }
 
         private Album CreateAlbum(AlbumModel album)
         {
-            var coverUrl = String.Format(AlbumArtUrlFormat, album.Cover.Replace('-', '/'), AlbumArtSize);
-            var cmAlbum = new Album
+             var cmAlbum = new Album
             {
                 Id = album.Id.ToString(),
-                Title = album.Title,
-                CoverUri = new Uri(coverUrl)
+                Title = album.Title
             };
             // On most calls the Album returned is a "lite" version, with only the properties above
             // available.

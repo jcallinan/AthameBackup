@@ -215,15 +215,7 @@ namespace Athame.DownloadAndTag
                         continue;
                     }
                     OnTrackDownloadProgress(eventArgs);
-                    // Download album artwork if it's not cached
-                    if (currentItem.Album != null && !AlbumArtCache.Instance.HasItem(currentItem.Album.CoverUri.ToString()))
-                    {
-                        eventArgs.State = DownloadState.DownloadingAlbumArtwork;
-                        OnTrackDownloadProgress(eventArgs);
-
-                        await AlbumArtCache.Instance.AddByDownload(currentItem.Album.CoverUri.ToString());
-
-                    }
+                   
                     eventArgs.TrackFile = await collection.Service.GetDownloadableTrackAsync(currentItem);
                     var downloader = collection.Service.GetDownloader(eventArgs.TrackFile);
                     downloader.Progress += (sender, args) =>
